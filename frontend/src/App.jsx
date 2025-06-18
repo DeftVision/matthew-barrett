@@ -10,7 +10,7 @@ import { SinglePage, TermsOfService, PrivacyPolicy } from './pages';
 
 function App() {
     return (
-        <LayoutWrapper>
+
             <Routes>
                 {siteConfig.layout.mode === 'spa' ? (
                     <Route path="/" element={<SinglePage />} />
@@ -41,7 +41,7 @@ function App() {
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-        </LayoutWrapper>
+        
 
     );
 }
