@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Hero, Services, Testimonials } from './sections';
+import { Hero, Testimonials } from './sections';
 import Contact from './Contact';
 import ProfileSection from '../components/ProfileSection';
 import VideoPlayer from '../components/VideoPlayer';
@@ -44,10 +44,6 @@ export default function SinglePage() {
             {/* Profile Section */}
             <Box component="section" sx={{ py: 8 }}>
                 <ProfileSection />
-            </Box>
-
-            <Box component="section" id="services" sx={{ py: 8 }}>
-                <Services />
             </Box>
 
             <Box component="section" id="testimonials" sx={{ py: 8 }}>
