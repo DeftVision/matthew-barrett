@@ -1,5 +1,5 @@
 export const siteConfig = {
-    siteName: 'VJSX',
+    siteName: 'Realtor Matthew Barrett',
     layout: {
         type: 'centered',
         navAnchor: 'left',
@@ -13,8 +13,8 @@ export const siteConfig = {
         expandFeedbackAnimation: true
     },
     branding: {
-        primaryColor: '#FF8C00',
-        accentColor: '#ffffff',
+        primaryColor: '#121212',
+        accentColor: '#D4AF37',
         headingFont: 'Playfair Display',
         bodyFont: 'Inter',
     },
