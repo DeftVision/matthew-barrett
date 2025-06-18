@@ -1,22 +1,54 @@
 import React from 'react';
+import { Stack, Box, Typography, Button } from '@mui/material';
 
 export default function ProfileSection() {
     return (
-        <section id="realtor-profile" className="container mx-auto py-16 px-4 flex flex-col md:flex-row items-center gap-10">
-            <img
-                src="/images/realtor.webp"
-                alt="Realtor's Name"
-                className="w-48 h-48 rounded-full object-cover shadow-lg"
-            />
-            <div className="max-w-xl">
-                <h2 className="text-3xl font-bold mb-2">Meet Realtor</h2>
-                <p className="text-lg text-gray-600 mb-4">
-                    Pono is a trusted real estate professional with a passion for helping clients find the perfect home. With a keen eye for detail and deep market knowledge, he makes every transaction smooth and stress-free.
-                </p>
-                <a href="#contact" className="inline-block px-6 py-3 bg-orange-500 text-white rounded hover:bg-orange-600 transition">
-                    Contact Pono
-                </a>
-            </div>
-        </section>
+        <Box
+            id="realtor-profile"
+            component="section"
+            sx={{
+                py: { xs: 8, md: 12 },
+                px: 2,
+                maxWidth: '1200px',
+                mx: 'auto',
+            }}
+        >
+            <Stack
+                direction={{ xs: 'column', md: 'row' }}
+                spacing={6}
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Box
+                    component="img"
+                    src="/images/realtor.webp"
+                    alt="Matthew Barrett"
+                    sx={{
+                        width: { xs: 160, sm: 180, md: 200 },
+                        height: 'auto',
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                        boxShadow: 3,
+                    }}
+                />
+
+                <Box maxWidth="600px">
+                    <Typography variant="h4" fontWeight="bold" gutterBottom>
+                        Matthew Barrett
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary" paragraph>
+                        Nam eu illum tritani gubergren. Etiam possim admodum ut pri, mel explicari temporibus necessitatibus ad, harum fabulas reformidans usu id. Quo ut dolores eloquentiam, posse intellegam qui an.
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        href="#contact"
+                        sx={{ mt: 2, backgroundColor: '#D4AF37', '&:hover': { backgroundColor: '#b8912c' } }}
+                    >
+                        Contact Matthew
+                    </Button>
+                </Box>
+            </Stack>
+        </Box>
     );
 }
