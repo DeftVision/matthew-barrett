@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Modal } from '@mui/material';
+import { Box, Modal, IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function LightboxGallery({ images = [] }) {
     const [open, setOpen] = useState(false);
@@ -11,6 +13,14 @@ export default function LightboxGallery({ images = [] }) {
     };
 
     const handleClose = () => setOpen(false);
+
+    const handleNext = () => {
+        setCurrent((prev) => (prev + 1) % images.length);
+    };
+
+    const handlePrev = () => {
+        setCurrent((prev) => (prev - 1 + images.length) % images.length);
+    };
 
     return (
         <Box
@@ -25,7 +35,7 @@ export default function LightboxGallery({ images = [] }) {
                 <Box
                     key={index}
                     sx={{
-                        flex: '1 1 calc(33.333% - 1rem)', // 3 per row with gap
+                        flex: '1 1 calc(33.333% - 1rem)',
                         maxWidth: 'calc(33.333% - 1rem)',
                         minWidth: '200px',
                         aspectRatio: '3 / 2',
@@ -41,6 +51,7 @@ export default function LightboxGallery({ images = [] }) {
                     <img
                         src={src}
                         alt={`Gallery ${index + 1}`}
+                        loading="lazy"
                         style={{
                             position: 'absolute',
                             top: 0,
@@ -63,13 +74,25 @@ export default function LightboxGallery({ images = [] }) {
                         maxWidth: '90vw',
                         maxHeight: '90vh',
                         outline: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 2,
                     }}
                 >
+                    <IconButton onClick={handlePrev} sx={{ color: 'white' }}>
+                        <ArrowBackIosNewIcon />
+                    </IconButton>
+
                     <img
                         src={images[current]}
                         alt={`Large ${current + 1}`}
-                        style={{ width: '100%', height: 'auto', borderRadius: 4 }}
+                        style={{ maxHeight: '90vh', maxWidth: '80vw', borderRadius: 4 }}
                     />
+
+                    <IconButton onClick={handleNext} sx={{ color: 'white' }}>
+                        <ArrowForwardIosIcon />
+                    </IconButton>
                 </Box>
             </Modal>
         </Box>

@@ -4,7 +4,8 @@ import { Hero, Testimonials } from './sections';
 import Contact from './Contact';
 import ProfileSection from '../components/ProfileSection';
 import VideoPlayer from '../components/VideoPlayer';
-import LightboxGallery from '../components/LightboxGallery';
+import FeaturedGallery from '../components/FeaturedGallery';
+
 import { Box } from '@mui/material';
 
 export default function SinglePage() {
@@ -19,12 +20,6 @@ export default function SinglePage() {
         }
     }, [location]);
 
-    const featuredImages = [
-        '/images/featured-home/1.webp',
-        '/images/featured-home/2.webp',
-        '/images/featured-home/3.webp',
-    ];
-
     return (
         <>
             <Box component="section" id="hero">
@@ -36,10 +31,8 @@ export default function SinglePage() {
                 <VideoPlayer />
             </Box>
 
-            {/* Image Gallery */}
-            <Box component="section" id="gallery" sx={{ py: 8 }}>
-                <LightboxGallery images={featuredImages} />
-            </Box>
+            {/* Featured Gallery Section */}
+            <FeaturedGallery />
 
             {/* Profile Section */}
             <Box component="section" sx={{ py: 8 }}>
