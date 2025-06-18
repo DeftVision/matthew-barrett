@@ -2,7 +2,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import LayoutWrapper from './layouts/LayoutWrapper';
 import { siteConfig } from './config/site.config';
 import { Box } from '@mui/material';
-import { Hero, Services, Testimonials } from './pages/sections';
+import { Hero, Testimonials } from './pages/sections';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
@@ -18,14 +18,6 @@ function App() {
                     <>
                         <Route path="/" element={<Navigate to="/hero" replace />} />
                         <Route path="/hero" element={<Hero />} />
-                        <Route
-                            path="/services"
-                            element={
-                                <Box sx={{ px: 2 }}>
-                                    <Services />
-                                </Box>
-                            }
-                        />
                         <Route
                             path="/testimonials"
                             element={
