@@ -55,27 +55,27 @@ export const siteConfig = {
         displayMedia: 'image', // or 'logo' or 'icon' or 'none'
         items: [
             {
-                name: 'Cassi K.',
-                feedback: `Trina built bookshelves and a window seat! She did a great job and they turned out so well! I really liked working with her. The photos are before paint which I opted to do. I can’t wait to get all my books set up!`,
-                initials: 'CK',
-                image: '/images/testimonials/bookshelf-cassi-k.webp',
+                name: 'Ron S.',
+                feedback: `There's only one thing I hate more than lying: skim milk. Which is water that's lying about being milk.`,
+                initials: 'RS',
+                image: '/images/testimonials/ron.webp',
                 logo: '', // optional, fallback for branding
                 icon: '', // optional fallback, e.g. 'HomeRepairService'
-                projectLabel: 'Built-In Bookshelves'
+                projectLabel: 'Parks and Rec'
             },
             {
-                name: 'Jeremy B.',
-                feedback: `Trina installed two exterior doors for us. Her work was excellent with an obvious eye for detail. She was responsive, detail oriented, and offered a very competitive bid.`,
-                initials: 'JB',
-                image: '/images/testimonials/exterior-door-jeremy-b.webp',
-                projectLabel: 'Exterior Door Installation'
+                name: 'Tobias F.',
+                feedback: `Michael, if I may take off my acting pants for one moment and pull my encouraging trousers up over my anxiety panties…`,
+                initials: 'TF',
+                image: '/images/testimonials/tobias.webp',
+                projectLabel: 'Arrested Development'
             },
             {
-                name: 'Elsa Z.',
-                feedback: `They were great! Very professional and the work was meticulously done. They were quick to respond with contacted and had superb follow-up. I would highly recommend them for your project that is too small for a big contractor and too big for you to handle. The can complete the entire project from start to finish! They framed, dry walled, mudded, taped, painted and installed tile and mantle of my new fireplace.`,
-                initials: 'EZ',
-                image: '/images/testimonials/fireplace-elsa-z.webp',
-                projectLabel: 'Custom Fireplace'
+                name: 'Phil D.',
+                feedback: `I’m cool, dad. That’s my thang. I’m hip, I surf the web, I text. LOL: laugh out loud. OMG: oh my God. WTF: why the face?`,
+                initials: 'PD',
+                image: '/images/testimonials/phil.webp',
+                projectLabel: 'Modern Family'
             }
         ]
     },
