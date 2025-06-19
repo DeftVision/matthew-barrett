@@ -36,8 +36,10 @@ export default function ProfileSection() {
                     <Typography variant="h4" fontWeight="bold" gutterBottom>
                         Matthew Barrett
                     </Typography>
-                    <Typography variant="body1" color="text.secondary" paragraph>
-                        Nam eu illum tritani gubergren. Etiam possim admodum ut pri, mel explicari temporibus necessitatibus ad, harum fabulas reformidans usu id. Quo ut dolores eloquentiam, posse intellegam qui an.
+                    <Typography variant="body1" color="text.secondary">
+                        I take the time to really understand what you’re looking for, then work hard to help you find the right fit.
+                        I keep things simple, stay responsive, and make sure the process feels clear and comfortable from start to finish.
+                        Whether you're buying your first place or your next one, I'm here to help.
                     </Typography>
                     <Button
                         variant="contained"

@@ -19,13 +19,13 @@ export default function Hero() {
         >
             <Container maxWidth="md">
                 <Typography variant="h2" gutterBottom>
-                    VJSX Template
+                    Barrett Collection
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 3 }}>
-                    ultricies himenaeos quisque class dolor justo, maecenas auctor curae leo.
+                    Where square footage meets emotional damage.
                 </Typography>
-                <Button variant="contained" color="secondary" href="#contact">
-                    CTA
+                <Button variant="contained" color="secondary" href="#gallery">
+                    Explore Now
                 </Button>
             </Container>
         </Box>
