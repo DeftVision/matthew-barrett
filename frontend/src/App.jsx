@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 import { Hero, Testimonials } from './pages/sections';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import SignIn from './pages/SignIn'
 
 import { SinglePage, TermsOfService, PrivacyPolicy } from './pages';
 
@@ -37,6 +38,7 @@ function App() {
                     </>
                 )}
 
+                <Route path="/signin" element={<SignIn />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="*" element={<NotFound />} />
