@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme, useMediaQuery } from '@mui/material';
-import MobileNav from './mobileNav';
+import MobileNav from './MobileNav';
 import DesktopNav from './DesktopNav';
 
 
