@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Stack, Snackbar, Alert } from '@mui/material';
 import { siteConfig } from '../config/site.config';
+import { useNavigate } from 'react-router-dom';
 
-export default function ContactForm() {
+export default function SignIn() {
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,7 +26,9 @@ export default function ContactForm() {
                     });
                 }
                 form.reset();
+                setTimeout(() => navigate('/'), 3000);
             })
+
             .catch((error) => {
                 if (siteConfig.features.contactSnackbar) {
                     setSnackbar({
@@ -42,6 +46,15 @@ export default function ContactForm() {
 
     return (
         <Box
+            sx={{
+                maxWidth: '600px',
+                mx: 'auto',      // horizontal centering
+                py: 4,
+                px: 2,           // optional: side padding on mobile
+                textAlign: 'center',
+            }}
+        >
+        <Box
             component='form'
             name='contact'
             method='POST'
@@ -54,12 +67,12 @@ export default function ContactForm() {
             <input type='hidden' name='bot-field' />
 
             <Stack direction='column' spacing={2}>
-                <Typography variant='h4'>Contact Matthew.</Typography>
+                <Typography variant='h4'>Welcome.</Typography>
                 <TextField
                     type='text'
                     label='Name'
                     fullWidth
-                    name='name'
+                    name='visitor_name'
                     required
                     aria-label='Name'
                 />
@@ -67,20 +80,19 @@ export default function ContactForm() {
                     type='email'
                     label='Email'
                     fullWidth
-                    name='email'
+                    name='visitor_email'
                     required
                     aria-label='Email'
                 />
                 <TextField
-                    type='text'
-                    label='Message'
-                    name='message'
-                    placeholder='Tell us about your project'
+                    type='phone'
+                    label='Phone'
                     fullWidth
-                    multiline
+                    name='visitor_phone'
                     required
-                    aria-label='Message'
+                    aria-label='Phone'
                 />
+
                 <Button type='submit' variant='contained' sx={{ mt: 2 }}>
                     Submit
                 </Button>
@@ -98,6 +110,7 @@ export default function ContactForm() {
                     </Alert>
                 </Snackbar>
             )}
+        </Box>
         </Box>
     );
 }
