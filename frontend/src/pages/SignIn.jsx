@@ -68,6 +68,7 @@ export default function SignIn() {
 
             <Stack direction='column' spacing={2}>
                 <Typography variant='h4'>Welcome.</Typography>
+                <Typography variant='h4'>Please Sign In</Typography>
                 <TextField
                     type='text'
                     label='Name'
