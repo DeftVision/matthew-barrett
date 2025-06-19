@@ -13,7 +13,7 @@ export default function FeaturedGallery() {
         <Box component="section" id="gallery" sx={{ py: 8 }}>
             <AnimatedBox>
                 <Typography variant="h4" gutterBottom align="center">
-                    Featured Property at 123 Luxe Ln
+                    3050 Country Crossing Rd, Heber City
                 </Typography>
 
                 <ResponsiveGallery images={images} />
@@ -22,17 +22,21 @@ export default function FeaturedGallery() {
                     <Card sx={{ maxWidth: '960px', width: '100%' }}>
                         <CardContent>
                             <Typography variant="h6" gutterBottom>
-                                Luxury 4-Bedroom Estate
+                                Luxury 5-Bedroom 6-Bath Estate
                             </Typography>
                             <Typography variant="body1">
-                                This meticulously maintained home offers an open floor plan, custom finishes, and abundant natural light.
+                                I have no strong feelings one way or the other. I’m 40% zinc! 40% dolomite!
+                                40% luck, 40% skill, 20% concentrated power of will. We're whalers on the moon, we carry a harpoon.
+                                I don’t know what you did, Fry, but once again, you screwed up in the most incredible way. Leela, I find your lack of depth disturbing.
+                                And by the way... I'm not drunk, I'm just exhausted from drinking all night.
                             </Typography>
 
                             <Collapse in={expanded} timeout="auto" unmountOnExit>
                                 <Typography variant="body2" sx={{ mt: 2 }}>
-                                    Featuring 4 spacious bedrooms, 3.5 baths, a chef’s kitchen, a home office, and a three-car garage — this
-                                    property combines comfort with modern elegance. The backyard includes a covered patio, heated pool, and
-                                    professionally landscaped garden perfect for entertaining.
+                                    A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear.
+                                    I didn't even know we were calling him Big Bear.
+                                    We never had the chance to. Maybe it was the eleven months he spent in the womb.
+                                    The doctor said there were claw marks on the walls of her uterus. Yeah, well, have you seen the new Mustang?
                                 </Typography>
                             </Collapse>
 
