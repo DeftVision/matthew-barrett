@@ -54,7 +54,6 @@ export default function FeaturedGallery() {
                         fontWeight: 600,
                         letterSpacing: 0.5,
                         textTransform: 'uppercase',
-                        // fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.35rem' },
                     }}
                 >
                     Featured
