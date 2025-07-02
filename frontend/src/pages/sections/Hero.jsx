@@ -24,7 +24,7 @@ export default function Hero() {
                 <Typography variant="subtitle1" sx={{ mb: 3 }}>
                     Exceptional homes deserve an exceptional approach.
                 </Typography>
-                <Button variant="contained" color="secondary" href="#gallery">
+                <Button variant="contained" color="secondary" href="#contact">
                     Schedule a FREE private consultation and experience the difference.
                 </Button>
             </Container>

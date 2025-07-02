@@ -75,7 +75,7 @@ export default function ContactForm() {
                     type='text'
                     label='Message'
                     name='message'
-                    placeholder='Tell us about your project'
+                    // placeholder=''
                     fullWidth
                     multiline
                     required
