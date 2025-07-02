@@ -9,6 +9,8 @@ export default function ResponsiveGallery({ images }) {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const visibleCount = 3;
 
+    const imageWidth = isMobile ? 110 : 290; // width + gap for scroll calculation
+
     const handleNext = () => {
         if (start + visibleCount < images.length) setStart(start + 1);
     };
@@ -17,7 +19,6 @@ export default function ResponsiveGallery({ images }) {
         if (start > 0) setStart(start - 1);
     };
 
-    const displayedImages = images.slice(start, start + visibleCount);
     const showNav = images.length > visibleCount;
 
     return (
@@ -35,40 +36,45 @@ export default function ResponsiveGallery({ images }) {
                 </IconButton>
             )}
 
+            {/* Image carousel track container */}
             <Box
                 sx={{
-                    display: 'flex',
-                    gap: 2,
-                    overflowX: 'visible',
-                    scrollSnapType: 'x mandatory',
-                    maxWidth: '100%',
-                    justifyContent: 'center',
-                    position: 'relative'
+                    overflow: 'hidden',
+                    width: isMobile ? 330 : visibleCount * imageWidth,
                 }}
             >
-                {displayedImages.map((src, i) => (
-                    <Box
-                        key={i}
-                        component="img"
-                        src={src}
-                        alt={`Home ${start + i + 1}`}
-                        loading="lazy"
-                        sx={{
-                            width: isMobile ? '100px' : '280px',
-                            height: isMobile ? '80px' : '180px',
-                            objectFit: 'cover',
-                            borderRadius: 2,
-                            scrollSnapAlign: 'start',
-                            position: 'relative',
-                            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                            '&:hover': {
-                                transform: 'scale(1.03)',
-                                zIndex: 1,
-                                boxShadow: 3,
-                            },
-                        }}
-                    />
-                ))}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        gap: 2,
+                        transform: `translateX(-${start * imageWidth}px)`,
+                        transition: 'transform 0.5s ease-in-out',
+                    }}
+                >
+                    {images.map((src, i) => (
+                        <Box
+                            key={i}
+                            component="img"
+                            src={src}
+                            alt={`Home ${i + 1}`}
+                            loading="lazy"
+                            sx={{
+                                width: isMobile ? '100px' : '280px',
+                                height: isMobile ? '80px' : '180px',
+                                objectFit: 'cover',
+                                borderRadius: 2,
+                                flexShrink: 0,
+                                scrollSnapAlign: 'start',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                '&:hover': {
+                                    transform: 'scale(1.03)',
+                                    zIndex: 1,
+                                    boxShadow: 3,
+                                },
+                            }}
+                        />
+                    ))}
+                </Box>
             </Box>
 
             {showNav && (

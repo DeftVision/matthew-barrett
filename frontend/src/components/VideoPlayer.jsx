@@ -6,6 +6,7 @@ export default function VideoPlayer({ src = '/videos/featured-home.mp4' }) {
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
                 <video
                     controls
+                    poster="/images/featured-home/1.webp"
                     style={{
                         position: 'absolute',
                         top: 0,
