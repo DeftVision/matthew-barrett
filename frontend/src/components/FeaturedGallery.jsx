@@ -32,9 +32,7 @@ export default function FeaturedGallery() {
                 animate={animation.animate}
                 sx={{ textAlign: 'center', mb: 4 }}
             >
-                <Typography variant="h4" gutterBottom>
-                    3050 Country Crossing Rd, Heber City
-                </Typography>
+
             </AnimatedBox>
 
             {/* Gallery */}

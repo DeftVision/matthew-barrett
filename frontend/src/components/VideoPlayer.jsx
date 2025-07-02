@@ -97,7 +97,7 @@ export default function FeaturedVideo() {
                         <video
                             controls
                             preload={isMobile ? 'metadata' : 'auto'}
-                            poster="/images/featured-home/1.webp"
+                            poster="/images/featured-home/2.webp"
                             style={{
                                 position: 'absolute',
                                 top: 0,
