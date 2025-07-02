@@ -1,5 +1,7 @@
+// frontend/src/config/site.config.js
+
 export const siteConfig = {
-    siteName: 'Realtor Matthew Barrett',
+    siteName: 'Barrett Luxury Collection',
     layout: {
         type: 'centered',
         navAnchor: 'left',

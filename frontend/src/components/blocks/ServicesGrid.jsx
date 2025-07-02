@@ -1,3 +1,5 @@
+//frontend/src/components/blocks/ServiceGrid.jsx
+
 import React from 'react';
 import { Box, Typography, Paper } from '@mui/material';
 import AnimatedBox from '../AnimatedBox';

@@ -1,3 +1,5 @@
+// frontend/src/config/features/animations/useInView.js
+
 import { useEffect, useRef, useState } from 'react';
 
 export function useInView(options = { threshold: 0.1 }) {
