@@ -25,18 +25,19 @@ export default function FeaturedGallery() {
                                 Luxury 5-Bedroom 6-Bath Estate
                             </Typography>
                             <Typography variant="body1">
-                                I have no strong feelings one way or the other. I’m 40% zinc! 40% dolomite!
-                                40% luck, 40% skill, 20% concentrated power of will. We're whalers on the moon, we carry a harpoon.
-                                I don’t know what you did, Fry, but once again, you screwed up in the most incredible way. Leela, I find your lack of depth disturbing.
-                                And by the way... I'm not drunk, I'm just exhausted from drinking all night.
+                                *Seller and Creative Financing Available* MUST SEE FULLY INDEPENDENT ADU, thoughtfully designed on one level with its own private entrance for easy access.
+                                Complete with a full-size kitchen equipped with high-end appliances and a spacious living area, it's perfect for extended family, guests, or rental opportunities.
+                                Discover this stunning 5 bed 6 bath 6,400 sq. ft. custom-built luxury home perfectly located in one of the most desired communities in Heber City.
                             </Typography>
 
                             <Collapse in={expanded} timeout="auto" unmountOnExit>
                                 <Typography variant="body2" sx={{ mt: 2 }}>
-                                    A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear.
-                                    I didn't even know we were calling him Big Bear.
-                                    We never had the chance to. Maybe it was the eleven months he spent in the womb.
-                                    The doctor said there were claw marks on the walls of her uterus. Yeah, well, have you seen the new Mustang?
+                                    Just 10 minutes from the new Mayflower Ski Resort.
+                                    Enjoy breathtaking views of Mount Timpanogos from many angles of the home. Very private home with an adjacent lot that can never be built on.
+                                    Designed with high-end finishes throughout, this home features heated floors for ultimate comfort and a spacious accessory dwelling unit (ADU) for added versatility.
+                                    The massive 6-car garage, complete with sleek epoxy flooring, offers ample space for vehicles and storage.
+                                    Nestled in a desirable location with quick access to world-class skiing and outdoor recreation, this estate is a true retreat that combines elegance, functionality, and unparalleled mountain living.
+                                    Don't miss the opportunity to make this one-of-a-kind property your own! Square footage figures are provided as a courtesy estimate only and were obtained from building plans.
                                 </Typography>
                             </Collapse>
 
