@@ -46,18 +46,20 @@ export default function FeaturedGallery() {
             <AnimatedBox
                 initial={animation.initial}
                 animate={animation.animate}
-                sx={{ textAlign: 'center', mb: 4 }}
+                sx={{ textAlign: 'center', mb: 2 }}
             >
                 <Typography
-                    variant="overline"
+                    variant={isMobile ? 'h6' : 'h5'}
                     sx={{
-                        color: 'text.secondary',
                         fontWeight: 600,
-                        letterSpacing: 1.5
+                        letterSpacing: 0.5,
+                        textTransform: 'uppercase',
+                        // fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.35rem' },
                     }}
                 >
-                    For Sale
+                    Featured
                 </Typography>
+
             </AnimatedBox>
 
             {/* Responsive Gallery */}
