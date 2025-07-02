@@ -1,3 +1,5 @@
+// src/components/FeaturedGallery.jsx
+
 import React, { useState } from 'react';
 import {
     Box,
@@ -54,18 +56,7 @@ export default function FeaturedGallery() {
                         letterSpacing: 1.5
                     }}
                 >
-                    Luxury Listing
-                </Typography>
-                <Typography
-                    variant="h5"
-                    component="h2"
-                    sx={{
-                        mt: 1,
-                        fontWeight: 'bold',
-                        fontSize: { xs: '1.5rem', sm: '2rem' }
-                    }}
-                >
-                    For Sale: Now Featuring 3050 Country Crossing Road in Heber City, Utah
+                    For Sale
                 </Typography>
             </AnimatedBox>
 
