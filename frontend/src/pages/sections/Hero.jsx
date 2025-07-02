@@ -19,13 +19,13 @@ export default function Hero() {
         >
             <Container maxWidth="md">
                 <Typography variant="h2" gutterBottom>
-                    Barrett Collection
+                    Barrett Luxury Collection
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 3 }}>
-                    Where square footage meets emotional damage.
+                    Exceptional homes deserve an exceptional approach.
                 </Typography>
                 <Button variant="contained" color="secondary" href="#gallery">
-                    Explore Now
+                    Schedule a FREE private consultation and experience the difference.
                 </Button>
             </Container>
         </Box>
