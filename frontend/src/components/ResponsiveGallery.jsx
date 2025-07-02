@@ -8,8 +8,7 @@ export default function ResponsiveGallery({ images }) {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const visibleCount = 3;
-
-    const imageWidth = isMobile ? 110 : 290; // width + gap for scroll calculation
+    const imageWidth = isMobile ? 110 : 290;
 
     const handleNext = () => {
         if (start + visibleCount < images.length) setStart(start + 1);
@@ -24,10 +23,11 @@ export default function ResponsiveGallery({ images }) {
     return (
         <Box
             sx={{
+                px: { xs: 2, sm: 3, md: 0 }, // ✅ Add horizontal padding on smaller screens
+                mt: 4,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                mt: 4,
             }}
         >
             {showNav && (
@@ -36,7 +36,6 @@ export default function ResponsiveGallery({ images }) {
                 </IconButton>
             )}
 
-            {/* Image carousel track container */}
             <Box
                 sx={{
                     overflow: 'hidden',

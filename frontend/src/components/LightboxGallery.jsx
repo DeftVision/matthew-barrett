@@ -1,100 +1,119 @@
-import React, { useState } from 'react';
-import { Box, Modal, IconButton } from '@mui/material';
+// src/components/LightboxGallery.jsx
+
+import React, { useState, useEffect } from 'react';
+import { Modal, Box, IconButton, Typography } from '@mui/material';
+import { useSwipeable } from 'react-swipeable';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function LightboxGallery({ images = [] }) {
-    const [open, setOpen] = useState(false);
-    const [current, setCurrent] = useState(0);
+export default function LightboxGallery({ images = [], open, onClose, startIndex = 0 }) {
+    const [current, setCurrent] = useState(startIndex);
+    const [animating, setAnimating] = useState(false);
 
-    const handleOpen = (index) => {
-        setCurrent(index);
-        setOpen(true);
-    };
-
-    const handleClose = () => setOpen(false);
+    useEffect(() => {
+        if (open) setCurrent(startIndex);
+    }, [open, startIndex]);
 
     const handleNext = () => {
-        setCurrent((prev) => (prev + 1) % images.length);
+        setAnimating(true);
+        setTimeout(() => {
+            setCurrent((prev) => (prev + 1) % images.length);
+            setAnimating(false);
+        }, 150);
     };
 
     const handlePrev = () => {
-        setCurrent((prev) => (prev - 1 + images.length) % images.length);
+        setAnimating(true);
+        setTimeout(() => {
+            setCurrent((prev) => (prev - 1 + images.length) % images.length);
+            setAnimating(false);
+        }, 150);
     };
 
+    const handlers = useSwipeable({
+        onSwipedLeft: handleNext,
+        onSwipedRight: handlePrev,
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true,
+    });
+
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 2,
-                justifyContent: 'center',
-            }}
-        >
-            {images.map((src, index) => (
-                <Box
-                    key={index}
+        <Modal open={open} onClose={onClose}>
+            <Box
+                {...handlers}
+                sx={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    bgcolor: 'rgba(0, 0, 0, 0.95)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 1300,
+                }}
+            >
+                {/* Close Button */}
+                <IconButton
+                    onClick={onClose}
                     sx={{
-                        flex: '1 1 calc(33.333% - 1rem)',
-                        maxWidth: 'calc(33.333% - 1rem)',
-                        minWidth: '200px',
-                        aspectRatio: '3 / 2',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        borderRadius: 2,
-                        boxShadow: 1,
-                        cursor: 'pointer',
-                        '&:hover': { opacity: 0.9 },
+                        position: 'absolute',
+                        top: 24,
+                        right: 24,
+                        color: 'white',
+                        backgroundColor: 'rgba(0,0,0,0.6)',
+                        '&:hover': { backgroundColor: 'rgba(0,0,0,0.8)' },
+                        zIndex: 1400,
                     }}
-                    onClick={() => handleOpen(index)}
+                    aria-label="Close"
                 >
-                    <img
-                        src={src}
-                        alt={`Gallery ${index + 1}`}
-                        loading="lazy"
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                        }}
-                    />
-                </Box>
-            ))}
+                    <CloseIcon />
+                </IconButton>
 
-            <Modal open={open} onClose={handleClose}>
-                <Box
+                {/* Slide Counter */}
+                <Typography
+                    variant="body2"
                     sx={{
-                        position: 'fixed',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        maxWidth: '90vw',
-                        maxHeight: '90vh',
-                        outline: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 2,
+                        position: 'absolute',
+                        top: 24,
+                        left: 24,
+                        color: 'white',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        px: 1.5,
+                        py: 0.5,
+                        borderRadius: 1,
+                        fontWeight: 500,
                     }}
                 >
-                    <IconButton onClick={handlePrev} sx={{ color: 'white' }}>
-                        <ArrowBackIosNewIcon />
-                    </IconButton>
+                    {current + 1} of {images.length}
+                </Typography>
 
-                    <img
-                        src={images[current]}
-                        alt={`Large ${current + 1}`}
-                        style={{ maxHeight: '90vh', maxWidth: '80vw', borderRadius: 4 }}
-                    />
+                {/* Previous Arrow */}
+                <IconButton onClick={handlePrev} sx={{ color: 'white', position: 'absolute', left: 16 }}>
+                    <ArrowBackIosNewIcon fontSize="large" />
+                </IconButton>
 
-                    <IconButton onClick={handleNext} sx={{ color: 'white' }}>
-                        <ArrowForwardIosIcon />
-                    </IconButton>
-                </Box>
-            </Modal>
-        </Box>
+                {/* Image */}
+                <img
+                    src={images[current]}
+                    alt={`Slide ${current + 1}`}
+                    style={{
+                        maxHeight: '90%',
+                        maxWidth: '90%',
+                        borderRadius: '8px',
+                        boxShadow: '0 0 24px rgba(255, 255, 255, 0.2)',
+                        opacity: animating ? 0 : 1,
+                        transition: 'opacity 0.3s ease',
+                    }}
+                />
+
+                {/* Next Arrow */}
+                <IconButton onClick={handleNext} sx={{ color: 'white', position: 'absolute', right: 16 }}>
+                    <ArrowForwardIosIcon fontSize="large" />
+                </IconButton>
+            </Box>
+        </Modal>
     );
 }
