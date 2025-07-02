@@ -32,20 +32,49 @@ export default function ProfileSection() {
                     }}
                 />
 
-                <Box maxWidth="600px">
-                    <Typography variant="h4" fontWeight="bold" gutterBottom>
+                <Box
+                    sx={{
+                        maxWidth: '600px',
+                        textAlign: { xs: 'center', md: 'left' }, // ✅ Responsive alignment
+                    }}
+                >
+                    <Typography
+                        variant="overline"
+                        color="secondary"
+                        sx={{ letterSpacing: 1 }}
+                    >
+                        Luxury Real Estate Expert
+                    </Typography>
+
+                    <Typography
+                        variant="h4"
+                        fontWeight="bold"
+                        gutterBottom
+                        sx={{ mt: 1 }}
+                    >
                         Matthew Barrett
                     </Typography>
-                    <Typography variant="body1" color="text.secondary">
+
+                    <Typography
+                        variant="body1"
+                        color="text.secondary"
+                        sx={{ lineHeight: 1.7, mt: 1 }}
+                    >
                         I take the time to really understand what you’re looking for, then work hard to help you find the right fit.
                         I keep things simple, stay responsive, and make sure the process feels clear and comfortable from start to finish.
                         Whether you're buying your first place or your next one, I'm here to help.
                     </Typography>
+
                     <Button
                         variant="contained"
                         color="primary"
                         href="#contact"
-                        sx={{ mt: 2, backgroundColor: '#D4AF37', '&:hover': { backgroundColor: '#b8912c' } }}
+                        sx={{
+                            mt: 3,
+                            backgroundColor: '#D4AF37',
+                            fontWeight: 'bold',
+                            '&:hover': { backgroundColor: '#b8912c' },
+                        }}
                     >
                         Contact Matthew
                     </Button>
