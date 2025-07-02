@@ -64,7 +64,7 @@ export default function FeaturedGallery() {
                         </Typography>
 
                         <Collapse in={expanded} timeout="auto" unmountOnExit>
-                            <Typography variant="body2" sx={{ mt: 2 }}>
+                            <Typography variant="body1" sx={{ mt: 2 }}>
                                 Just 10 minutes from the new Mayflower Ski Resort.
                                 Enjoy breathtaking views of Mount Timpanogos from many angles of the home. Very private home with an adjacent lot that can never be built on.
                                 Designed with high-end finishes throughout, this home features heated floors for ultimate comfort and a spacious accessory dwelling unit (ADU) for added versatility.
