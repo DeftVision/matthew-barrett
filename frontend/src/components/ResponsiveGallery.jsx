@@ -1,89 +1,129 @@
-import React, { useState } from 'react';
-import { Box, IconButton, useMediaQuery } from '@mui/material';
-import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
+// src/components/ResponsiveGallery.jsx
 
-export default function ResponsiveGallery({ images }) {
-    const [start, setStart] = useState(0);
+import React, { useState } from 'react';
+import { Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import LightboxGallery from './LightboxGallery';
+
+export default function ResponsiveGallery({ images = [] }) {
+    const [current, setCurrent] = useState(0);
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    const visibleCount = 3;
-    const imageWidth = isMobile ? 110 : 290;
+    const visibleThumbnails = isMobile ? 1 : 3;
 
     const handleNext = () => {
-        if (start + visibleCount < images.length) setStart(start + 1);
+        setCurrent((prev) => (prev + 1) % images.length);
     };
 
     const handlePrev = () => {
-        if (start > 0) setStart(start - 1);
+        setCurrent((prev) => (prev - 1 + images.length) % images.length);
     };
 
-    const showNav = images.length > visibleCount;
+    const handleOpenLightbox = (index) => {
+        setCurrent(index);
+        setLightboxOpen(true);
+    };
+
+    const handleCloseLightbox = () => {
+        setLightboxOpen(false);
+    };
+
+    const startIndex = current;
+    const endIndex = (startIndex + visibleThumbnails) % images.length;
+    const visible = images.slice(
+        startIndex,
+        endIndex > startIndex ? endIndex : undefined
+    );
 
     return (
         <Box
             sx={{
-                px: { xs: 2, sm: 3, md: 0 }, // ✅ Add horizontal padding on smaller screens
-                mt: 4,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                mt: { xs: 4, md: 6 },
+                px: { xs: 2, sm: 4 },
+                width: '100%',
+                maxWidth: '1200px',
+                mx: 'auto',
+                position: 'relative',
             }}
         >
-            {showNav && (
-                <IconButton onClick={handlePrev} disabled={start === 0} sx={{ mr: 1 }}>
-                    <ArrowBackIos fontSize="small" />
-                </IconButton>
-            )}
-
             <Box
                 sx={{
-                    overflow: 'hidden',
-                    width: isMobile ? 330 : visibleCount * imageWidth,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
                 }}
             >
+                <IconButton
+                    onClick={handlePrev}
+                    sx={{
+                        position: 'absolute',
+                        left: { xs: 4, sm: 8 },
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        zIndex: 2,
+                        backgroundColor: 'rgba(255,255,255,0.7)',
+                        '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
+                    }}
+                >
+                    <ArrowBackIosNewIcon fontSize="small" />
+                </IconButton>
+
                 <Box
                     sx={{
                         display: 'flex',
+                        justifyContent: 'center',
                         gap: 2,
-                        transform: `translateX(-${start * imageWidth}px)`,
-                        transition: 'transform 0.5s ease-in-out',
+                        overflow: 'hidden',
+                        width: '100%',
                     }}
                 >
-                    {images.map((src, i) => (
+                    {visible.map((src, i) => (
                         <Box
                             key={i}
                             component="img"
                             src={src}
-                            alt={`Home ${i + 1}`}
-                            loading="lazy"
+                            alt={`Gallery ${i + 1}`}
+                            onClick={() => handleOpenLightbox((startIndex + i) % images.length)}
                             sx={{
-                                width: isMobile ? '100px' : '280px',
-                                height: isMobile ? '80px' : '180px',
+                                height: { xs: 220, sm: 180 },
+                                width: { xs: '100%', sm: 220 },
                                 objectFit: 'cover',
                                 borderRadius: 2,
-                                flexShrink: 0,
-                                scrollSnapAlign: 'start',
-                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                                '&:hover': {
-                                    transform: 'scale(1.03)',
-                                    zIndex: 1,
-                                    boxShadow: 3,
-                                },
+                                cursor: 'pointer',
+                                boxShadow: 2,
+                                transition: 'opacity 0.3s',
+                                '&:hover': { opacity: 0.9 },
                             }}
                         />
                     ))}
                 </Box>
-            </Box>
 
-            {showNav && (
                 <IconButton
                     onClick={handleNext}
-                    disabled={start + visibleCount >= images.length}
-                    sx={{ ml: 1 }}
+                    sx={{
+                        position: 'absolute',
+                        right: { xs: 4, sm: 8 },
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        zIndex: 2,
+                        backgroundColor: 'rgba(255,255,255,0.7)',
+                        '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
+                    }}
                 >
-                    <ArrowForwardIos fontSize="small" />
+                    <ArrowForwardIosIcon fontSize="small" />
                 </IconButton>
+            </Box>
+
+            {lightboxOpen && (
+                <LightboxGallery
+                    images={images}
+                    initialIndex={current}
+                    onClose={handleCloseLightbox}
+                />
             )}
         </Box>
     );
