@@ -22,7 +22,7 @@ export default function Hero() {
                     Barrett Luxury Collection
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 3 }}>
-                    Exceptional homes deserve an exceptional approach.
+                    A More Precise Approach to Real Estate
                 </Typography>
                 <Box
                     sx={{
