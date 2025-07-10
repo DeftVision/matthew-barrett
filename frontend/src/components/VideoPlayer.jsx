@@ -107,7 +107,7 @@ export default function FeaturedVideo() {
                                 objectFit: 'cover',
                             }}
                         >
-                            <source src="/videos/your-video.mp4" type="video/mp4" />
+                            <source src="/videos/featured_listing_Heber.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </Box>
