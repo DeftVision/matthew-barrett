@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Stack, Snackbar, Alert } from '@mui/material';
-import { siteConfig } from '../config/site.config';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {Alert, Box, Button, Snackbar, Stack, TextField, Typography} from '@mui/material';
+import {siteConfig} from '../config/site.config';
+import {useNavigate} from 'react-router-dom';
 
 export default function SignIn() {
-    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+    const [snackbar, setSnackbar] = useState({open: false, message: '', severity: 'success'});
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -41,7 +41,7 @@ export default function SignIn() {
     };
 
     const handleClose = () => {
-        setSnackbar({ ...snackbar, open: false });
+        setSnackbar({...snackbar, open: false});
     };
 
     return (
@@ -54,64 +54,64 @@ export default function SignIn() {
                 textAlign: 'center',
             }}
         >
-        <Box
-            component='form'
-            name='contact'
-            method='POST'
-            onSubmit={handleSubmit}
-            data-netlify='true'
-            netlify-honeypot='bot-field'
-            sx={{ width: '100%', mt: 4 }}
-        >
-            <input type='hidden' name='form-name' value='contact' />
-            <input type='hidden' name='bot-field' />
+            <Box
+                component='form'
+                name='contact'
+                method='POST'
+                onSubmit={handleSubmit}
+                data-netlify='true'
+                netlify-honeypot='bot-field'
+                sx={{width: '100%', mt: 4}}
+            >
+                <input type='hidden' name='form-name' value='contact'/>
+                <input type='hidden' name='bot-field'/>
 
-            <Stack direction='column' spacing={2}>
-                <Typography variant='h4'>Welcome.</Typography>
-                <Typography variant='h4'>Please Sign In</Typography>
-                <TextField
-                    type='text'
-                    label='Name'
-                    fullWidth
-                    name='visitor_name'
-                    required
-                    aria-label='Name'
-                />
-                <TextField
-                    type='email'
-                    label='Email'
-                    fullWidth
-                    name='visitor_email'
-                    required
-                    aria-label='Email'
-                />
-                <TextField
-                    type='phone'
-                    label='Phone'
-                    fullWidth
-                    name='visitor_phone'
-                    required
-                    aria-label='Phone'
-                />
+                <Stack direction='column' spacing={2}>
+                    <Typography variant='h4'>Welcome.</Typography>
+                    <Typography variant='h4'>Please Sign In</Typography>
+                    <TextField
+                        type='text'
+                        label='Name'
+                        fullWidth
+                        name='visitor_name'
+                        required
+                        aria-label='Name'
+                    />
+                    <TextField
+                        type='email'
+                        label='Email'
+                        fullWidth
+                        name='visitor_email'
+                        required
+                        aria-label='Email'
+                    />
+                    <TextField
+                        type='phone'
+                        label='Phone'
+                        fullWidth
+                        name='visitor_phone'
+                        required
+                        aria-label='Phone'
+                    />
 
-                <Button type='submit' variant='contained' sx={{ mt: 2 }}>
-                    Submit
-                </Button>
-            </Stack>
+                    <Button type='submit' variant='contained' sx={{mt: 2}}>
+                        Submit
+                    </Button>
+                </Stack>
 
-            {siteConfig.features.contactSnackbar && (
-                <Snackbar
-                    open={snackbar.open}
-                    autoHideDuration={4000}
-                    onClose={handleClose}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                >
-                    <Alert severity={snackbar.severity} onClose={handleClose}>
-                        {snackbar.message}
-                    </Alert>
-                </Snackbar>
-            )}
-        </Box>
+                {siteConfig.features.contactSnackbar && (
+                    <Snackbar
+                        open={snackbar.open}
+                        autoHideDuration={4000}
+                        onClose={handleClose}
+                        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                    >
+                        <Alert severity={snackbar.severity} onClose={handleClose}>
+                            {snackbar.message}
+                        </Alert>
+                    </Snackbar>
+                )}
+            </Box>
         </Box>
     );
 }
