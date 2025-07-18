@@ -67,8 +67,8 @@ export default function SignIn() {
                 <input type='hidden' name='bot-field'/>
 
                 <Stack direction='column' spacing={2}>
-                    <Typography variant='h4'>Welcome.</Typography>
-                    <Typography variant='h4'>Please Sign In</Typography>
+                    <Typography variant='h3'>Barrett Luxury Home</Typography>
+                    <Typography variant='h4'>Sign In</Typography>
                     <TextField
                         type='text'
                         label='Name'
