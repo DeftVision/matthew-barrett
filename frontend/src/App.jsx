@@ -1,5 +1,4 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import LayoutWrapper from './layouts/LayoutWrapper';
 import { siteConfig } from './config/site.config';
 import { Box } from '@mui/material';
 import { Hero, Testimonials } from './pages/sections';
@@ -11,7 +10,6 @@ import { SinglePage, TermsOfService, PrivacyPolicy } from './pages';
 
 function App() {
     return (
-
             <Routes>
                 {siteConfig.layout.mode === 'spa' ? (
                     <Route path="/" element={<SinglePage />} />
