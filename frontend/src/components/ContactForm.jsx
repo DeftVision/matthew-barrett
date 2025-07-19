@@ -1,3 +1,5 @@
+import emailjs from '@emailjs/browser';
+import { sendContactForm } from '../utils/emailService';
 import React, { useState } from 'react';
 import {
     Box,
@@ -9,39 +11,37 @@ import {
     Alert
 } from '@mui/material';
 import { siteConfig } from '../config/site.config';
-
 export default function ContactForm() {
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+    const [isSending, setIsSending] = useState(false);
 
-    const handleSubmit = (e) => {
+    const sendEmail = (e) => {
         e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
+        setIsSending(true);
 
-        fetch('/', {
-            method: 'POST',
-            body: data,
-        })
-            .then(() => {
-                if (siteConfig.features.contactSnackbar) {
-                    setSnackbar({
-                        open: true,
-                        message: 'Form submitted successfully',
-                        severity: 'success',
-                    });
-                }
-                form.reset();
-            })
-            .catch((error) => {
-                if (siteConfig.features.contactSnackbar) {
-                    setSnackbar({
-                        open: true,
-                        message: 'Form submission error: ' + error.message,
-                        severity: 'error',
-                    });
-                }
-            });
+        // Honeypot check
+        if (e.target.website.value) {
+            setIsSending(false);
+            return;
+        }
+
+        sendContactForm(e.target).then(
+            (result) => {
+                console.log('Email sent!', result.text);
+                alert("Thank you! Your message has been sent.");
+                setIsSending(false);
+            },
+            (error) => {
+                console.error('Email failed:', error);
+                alert("Oops, something went wrong. Please try again.");
+                setIsSending(false);
+            }
+        );
+
+        e.target.reset(); // Clear the form after sending
     };
+
+
 
     const handleClose = () => {
         setSnackbar({ ...snackbar, open: false });
@@ -60,52 +60,33 @@ export default function ContactForm() {
                 component="form"
                 name="contact"
                 method="POST"
-                onSubmit={handleSubmit}
-                data-netlify="true"
-                netlify-honeypot="bot-field"
+                onSubmit={sendEmail}
                 sx={{
                     maxWidth: 600,
                     mx: 'auto',
                     width: '100%',
                 }}
             >
-                <input type="hidden" name="form-name" value="contact" />
-                <input type="hidden" name="bot-field" />
-
+                <Typography variant="h4" fontWeight="bold" gutterBottom>
+                    Contact Matthew
+                </Typography>
                 <Stack direction="column" spacing={3}>
-                    <Typography variant="h4" fontWeight="bold" gutterBottom>
-                        Contact Matthew
-                    </Typography>
-
+                    <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
+                    <TextField label="Name" name="user_name" aria-label='Your name' fullWidth required />
+                    <TextField label="Email" type="email" name="user_email" aria-label='Your email' fullWidth required />
                     <TextField
-                        type="text"
-                        label="Name"
-                        fullWidth
-                        name="name"
-                        required
-                        aria-label="Name"
-                    />
-                    <TextField
-                        type="email"
-                        label="Email"
-                        fullWidth
-                        name="email"
-                        required
-                        aria-label="Email"
-                    />
-                    <TextField
-                        type="text"
                         label="Message"
-                        fullWidth
                         name="message"
-                        required
+                        aria-label="You Message"
+                        fullWidth
                         multiline
-                        minRows={4}
-                        aria-label="Message"
+                        rows={4}
+                        required
                     />
                     <Button
                         type="submit"
                         variant="contained"
+                        disabled={isSending}
                         sx={{
                             mt: 1,
                             backgroundColor: '#D4AF37',
@@ -115,7 +96,7 @@ export default function ContactForm() {
                             },
                         }}
                     >
-                        Submit
+                        {isSending ? 'Sending...' : 'Get in Touch'}
                     </Button>
                 </Stack>
 
