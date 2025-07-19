@@ -1,3 +1,4 @@
+import emailjs from '@emailjs/browser';
 import React, { useState } from 'react';
 import {
     Box,
@@ -9,9 +10,35 @@ import {
     Alert
 } from '@mui/material';
 import { siteConfig } from '../config/site.config';
-
 export default function ContactForm() {
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        setIsSending(true);
+
+        // Honeypot check
+        if (e.target.website.value) {
+            setIsSending(false);
+            return;
+        }
+
+        sendContactForm(e.target).then(
+            (result) => {
+                console.log('Email sent!', result.text);
+                alert("Thank you! Your message has been sent.");
+                setIsSending(false);
+            },
+            (error) => {
+                console.error('Email failed:', error.text);
+                alert("Oops, something went wrong. Please try again.");
+                setIsSending(false);
+            }
+        );
+
+        e.target.reset(); // Clear the form after sending
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
