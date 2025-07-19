@@ -105,7 +105,7 @@ export const siteConfig = {
     },
     meta: {
         '/': {
-            title: 'Welcome',
+            title: '',
             description: 'Landing page for modern web solutions.',
         },
         '/services': {
