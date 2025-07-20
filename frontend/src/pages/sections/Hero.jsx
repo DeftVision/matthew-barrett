@@ -19,7 +19,7 @@ export default function Hero() {
         >
             <Container maxWidth="md">
                 <Typography variant="h2" gutterBottom>
-                    Barrett Luxury Collection
+                    Barrett Luxury Homes
                 </Typography>
                 <Typography variant="subtitle1" sx={{ mb: 3 }}>
                     A More Precise Approach to Real Estate
