@@ -13,42 +13,46 @@ import {
     TextField,
     Typography
 } from '@mui/material';
+import { sendOpenHouseForm } from '../utils/emailService';
 import { siteConfig } from '../config/site.config';
 
 export default function SignIn() {
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+    const [isSending, setIsSending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
+        setIsSending(true);
 
-        fetch('/', {
-            method: 'POST',
-            body: data
-        })
-            .then(() => {
-                if (siteConfig.features.contactSnackbar) {
-                    setSnackbar({
-                        open: true,
-                        message: 'Form submitted successfully',
-                        severity: 'success'
-                    });
-                }
-                form.reset();
+        // Honeypot check
+        if (e.target.website.value) {
+            setIsSending(false);
+            return;
+        }
+
+        sendOpenHouseForm(e.target).then(
+            (result) => {
+                console.log('Email sent!', result.text);
+                setSnackbar({
+                    open: true,
+                    message: 'Form submitted successfully',
+                    severity: 'success'
+                });
+                e.target.reset();
                 setTimeout(() => {
                     window.location.href = 'https://www.barrettluxuryhomes.com/';
                 }, 1500);
-            })
-            .catch((error) => {
-                if (siteConfig.features.contactSnackbar) {
-                    setSnackbar({
-                        open: true,
-                        message: 'Form submission error: ' + error.message,
-                        severity: 'error'
-                    });
-                }
-            });
+            },
+            (error) => {
+                console.error('Email failed:', error);
+                setSnackbar({
+                    open: true,
+                    message: 'Something went wrong. Please try again.',
+                    severity: 'error'
+                });
+                setIsSending(false);
+            }
+        );
     };
 
     const handleClose = () => {
@@ -67,7 +71,7 @@ export default function SignIn() {
         >
             <Box sx={{ mb: 2 }}>
                 <img
-                    src="/logo.png" // <-- Make sure this file is in public/
+                    src="/logo.png"
                     alt="Barrett Luxury Homes"
                     style={{ maxWidth: '200px', height: 'auto' }}
                 />
@@ -92,18 +96,14 @@ export default function SignIn() {
                 3050 Country Crossing Rd, Heber City, Utah 84032
             </Typography>
 
-
             <Box
                 component="form"
-                name="contact"
+                name="open-house-form"
                 method="POST"
                 onSubmit={handleSubmit}
-                data-netlify="true"
-                netlify-honeypot="bot-field"
                 sx={{ width: '100%', my: 5 }}
             >
-                <input type="hidden" name="form-name" value="contact" />
-                <input type="hidden" name="bot-field" />
+                <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
 
                 <Stack direction="column" spacing={2} textAlign="left">
                     <TextField type="text" label="Name" fullWidth name="visitor_name" required />
@@ -137,8 +137,14 @@ export default function SignIn() {
                         </RadioGroup>
                     </FormControl>
 
-                    <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
-                        Submit
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        fullWidth
+                        disabled={isSending}
+                        sx={{ mt: 2 }}
+                    >
+                        {isSending ? 'Sending...' : 'Submit'}
                     </Button>
                 </Stack>
 
