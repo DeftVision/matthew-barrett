@@ -74,6 +74,7 @@ export default function ContactForm() {
                     <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
                     <TextField label="Name" name="user_name" aria-label='Your name' fullWidth required />
                     <TextField label="Email" type="email" name="user_email" aria-label='Your email' fullWidth required />
+                    <TextField label="Phone" type="tel" name="user_phone" aria-label='Your Phone' fullWidth required />
                     <TextField
                         label="Message"
                         name="message"
