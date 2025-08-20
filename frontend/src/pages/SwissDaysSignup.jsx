@@ -4,10 +4,9 @@ import {
     Box,
     Button,
     FormControl,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
+    InputLabel,
+    MenuItem,
+    Select,
     Snackbar,
     Stack,
     TextField,
@@ -16,9 +15,10 @@ import {
 import { sendOpenHouseForm } from '../utils/emailService';
 import { siteConfig } from '../config/site.config';
 
-export default function SignIn() {
+export default function SwissDaysSignup() {
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
     const [isSending, setIsSending] = useState(false);
+    const [appointmentDate, setAppointmentDate] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,7 +30,18 @@ export default function SignIn() {
             return;
         }
 
-        sendSwissDaysForm(e.target).then(
+        // Ensure date selected
+        if (!appointmentDate) {
+            setSnackbar({
+                open: true,
+                message: 'Please choose an appointment date.',
+                severity: 'error'
+            });
+            setIsSending(false);
+            return;
+        }
+
+        sendOpenHouseForm(e.target).then(
             (result) => {
                 console.log('Email sent!', result.text);
                 setSnackbar({
@@ -50,14 +61,16 @@ export default function SignIn() {
                     message: 'Something went wrong. Please try again.',
                     severity: 'error'
                 });
-                setIsSending(false);
             }
-        );
+        ).finally(() => setIsSending(false));
     };
 
     const handleClose = () => {
         setSnackbar({ ...snackbar, open: false });
     };
+
+    const labelId = 'appointment-date-label';
+    const selectId = 'appointment-date';
 
     return (
         <Box
@@ -77,16 +90,12 @@ export default function SignIn() {
                 />
             </Box>
 
-            <Typography variant="h4" mb={0}>
-                Barrett Luxury Homes
-            </Typography>
-            <Typography variant="h5" mb={1}>
+            <Typography variant="h4" mb={1}>
                 SWISS DAYS EXCLUSIVE SHOWINGS
             </Typography>
-            <Typography variant="h6" mb={1}>
+            <Typography variant="h5" mb={1}>
                 AUGUST 28, 29, 30
             </Typography>
-
 
             <Box
                 component="form"
@@ -95,15 +104,32 @@ export default function SignIn() {
                 onSubmit={handleSubmit}
                 sx={{ width: '100%', my: 5 }}
             >
+                {/* Honeypot */}
                 <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
+
+                {/* Hidden field synced to Select so FormData includes it */}
+                <input type="hidden" name="appointment_date" value={appointmentDate} />
 
                 <Stack direction="column" spacing={2} textAlign="left">
                     <TextField type="text" label="Name" fullWidth name="visitor_name" required />
                     <TextField type="email" label="Email" fullWidth name="visitor_email" required />
                     <TextField type="tel" label="Phone" fullWidth name="visitor_phone" required />
-                    <TextField type="text" label="Appointment" default="Book a time" fullWidth name="appointment" required />
 
-
+                    <FormControl required>
+                        <InputLabel id={labelId}>Appointment Date</InputLabel>
+                        <Select
+                            labelId={labelId}
+                            id={selectId}
+                            variant="outlined"
+                            label="Appointment Date"
+                            value={appointmentDate}
+                            onChange={(e) => setAppointmentDate(e.target.value)}
+                        >
+                            <MenuItem value="August 28th">August 28th</MenuItem>
+                            <MenuItem value="August 29th">August 29th</MenuItem>
+                            <MenuItem value="August 30th">August 30th</MenuItem>
+                        </Select>
+                    </FormControl>
 
                     <Button
                         type="submit"
