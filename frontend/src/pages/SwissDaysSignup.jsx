@@ -19,30 +19,47 @@ export default function SwissDaysSignup() {
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
     const [isSending, setIsSending] = useState(false);
     const [appointmentDate, setAppointmentDate] = useState('');
+    const [appointmentTime, setAppointmentTime] = useState('');
+
+    const timeOptions = React.useMemo(() => {
+        const out = [];
+        for (let h = 7; h <= 23; h++) {
+            for (let m = 0; m < 60; m += 30) {
+                if (h === 23 && m === 30) break; // skip 11:30 PM
+                const hour12 = ((h + 11) % 12) + 1;
+                const mm = m === 0 ? '00' : '30';
+                const ampm = h < 12 ? 'AM' : 'PM';
+                const label = `${hour12}:${mm} ${ampm}`;
+                out.push({ value: label, label });
+            }
+        }
+        return out;
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsSending(true);
 
-        // Honeypot check
+        // Honeypot
         if (e.target.website.value) {
             setIsSending(false);
             return;
         }
 
-        // Ensure date selected
+        // Simple required checks
         if (!appointmentDate) {
-            setSnackbar({
-                open: true,
-                message: 'Please choose an appointment date.',
-                severity: 'error'
-            });
+            setSnackbar({ open: true, message: 'Please choose an appointment date.', severity: 'error' });
+            setIsSending(false);
+            return;
+        }
+        if (!e.target.appointment_time.value) {
+            setSnackbar({ open: true, message: 'Please select a time.', severity: 'error' });
             setIsSending(false);
             return;
         }
 
-        sendOpenHouseForm(e.target).then(
-            (result) => {
+        sendOpenHouseForm(e.target)
+            .then((result) => {
                 console.log('Email sent!', result.text);
                 setSnackbar({
                     open: true,
@@ -50,19 +67,21 @@ export default function SwissDaysSignup() {
                     severity: 'success'
                 });
                 e.target.reset();
+                setAppointmentDate('');
+                setAppointmentTime('');
                 setTimeout(() => {
                     window.location.href = 'https://www.barrettluxuryhomes.com/';
                 }, 1500);
-            },
-            (error) => {
+            })
+            .catch((error) => {
                 console.error('Email failed:', error);
                 setSnackbar({
                     open: true,
                     message: 'Something went wrong. Please try again.',
                     severity: 'error'
                 });
-            }
-        ).finally(() => setIsSending(false));
+            })
+            .finally(() => setIsSending(false));
     };
 
     const handleClose = () => {
@@ -107,15 +126,16 @@ export default function SwissDaysSignup() {
                 {/* Honeypot */}
                 <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
 
-                {/* Hidden field synced to Select so FormData includes it */}
+                {/* Hidden field so FormData includes the date */}
                 <input type="hidden" name="appointment_date" value={appointmentDate} />
 
                 <Stack direction="column" spacing={2} textAlign="left">
-                    <TextField type="text" label="Name" fullWidth name="visitor_name" required />
-                    <TextField type="email" label="Email" fullWidth name="visitor_email" required />
-                    <TextField type="tel" label="Phone" fullWidth name="visitor_phone" required />
+                    <TextField type="text" label="Name" fullWidth name="visitor_name" required autoComplete='name' />
+                    <TextField type="email" label="Email" fullWidth name="visitor_email" required autoComplete='email' />
+                    <TextField type="tel" label="Phone" fullWidth name="visitor_phone" required autoComplete='tel' />
 
-                    <FormControl required>
+
+                    <FormControl required fullWidth>
                         <InputLabel id={labelId}>Appointment Date</InputLabel>
                         <Select
                             labelId={labelId}
@@ -125,11 +145,33 @@ export default function SwissDaysSignup() {
                             value={appointmentDate}
                             onChange={(e) => setAppointmentDate(e.target.value)}
                         >
+                            <MenuItem value="" disabled>Select date</MenuItem>
                             <MenuItem value="August 28th">August 28th</MenuItem>
                             <MenuItem value="August 29th">August 29th</MenuItem>
                             <MenuItem value="August 30th">August 30th</MenuItem>
                         </Select>
                     </FormControl>
+                    <input type="hidden" name="appointment_time" value={appointmentTime} />
+
+                    <FormControl required fullWidth>
+                        <InputLabel id="appointment-time-label">Preferred Time</InputLabel>
+                        <Select
+                            variant='outlined'
+                            labelId="appointment-time-label"
+                            id="appointment-time"
+                            label="Preferred Time"
+                            value={appointmentTime}
+                            onChange={(e) => setAppointmentTime(e.target.value)}
+                        >
+                            <MenuItem value="" disabled>Select time</MenuItem>
+                            {timeOptions.map((t) => (
+                                <MenuItem key={t.value} value={t.value}>
+                                    {t.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
 
                     <Button
                         type="submit"
@@ -142,7 +184,7 @@ export default function SwissDaysSignup() {
                     </Button>
                 </Stack>
 
-                {siteConfig.features.contactSnackbar && (
+                {siteConfig?.features?.contactSnackbar && (
                     <Snackbar
                         open={snackbar.open}
                         autoHideDuration={4000}
