@@ -113,7 +113,7 @@ export default function SwissDaysSignup() {
                 SWISS DAYS EXCLUSIVE SHOWINGS
             </Typography>
             <Typography variant="h5" mb={1}>
-                AUGUST 28, 29, 30
+                AUGUST 27th - SEPTEMBER 1st
             </Typography>
 
             <Box
@@ -146,9 +146,11 @@ export default function SwissDaysSignup() {
                             onChange={(e) => setAppointmentDate(e.target.value)}
                         >
                             <MenuItem value="" disabled>Select date</MenuItem>
-                            <MenuItem value="August 28th">August 28th</MenuItem>
-                            <MenuItem value="August 29th">August 29th</MenuItem>
-                            <MenuItem value="August 30th">August 30th</MenuItem>
+                            <MenuItem value="Aug 28th">Aug 27th - Wed</MenuItem>
+                            <MenuItem value="Aug 28th">Aug 28th - Thur</MenuItem>
+                            <MenuItem value="Aug 29th">Aug 29th - Fri</MenuItem>
+                            <MenuItem value="Aug 30th">Aug 30th - Sat</MenuItem>
+                            <MenuItem value="Sept 1st">Sept 1st - Mon</MenuItem>
                         </Select>
                     </FormControl>
                     <input type="hidden" name="appointment_time" value={appointmentTime} />
