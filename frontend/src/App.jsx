@@ -6,7 +6,6 @@ import {
     Contact,
     NotFound,
     SignIn,
-    SwissDaysSignup,
     SinglePage,
     TermsOfService,
     PrivacyPolicy
@@ -42,7 +41,6 @@ function App() {
                 )}
 
                 <Route path="/signin" element={<SignIn />} />
-                <Route path="/swissdays" element={<SwissDaysSignup />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="*" element={<NotFound />} />
