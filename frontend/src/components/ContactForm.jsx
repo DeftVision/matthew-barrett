@@ -70,6 +70,12 @@ export default function ContactForm() {
                 <Typography variant="h4" fontWeight="bold" gutterBottom>
                     Contact Matthew
                 </Typography>
+                <Typography>
+                    <a href="tel:+13853685963" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        (385) 368-5963
+                    </a>
+                </Typography>
+
                 <Stack direction="column" spacing={3}>
                     <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
                     <TextField label="Name" name="user_name" aria-label='Your name' fullWidth required />
